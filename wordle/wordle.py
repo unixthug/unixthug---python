@@ -23,7 +23,7 @@ def guess(word, solution):
 			check[i] = word[i]
 			continue
 		for j in range(5):
-			if word[i] == solution[j] and word[i] != check[i]:
+			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j]:
 				hasY = True
 				value[i] = YELLOW + word[i] + ENDC
 				tempy = j
