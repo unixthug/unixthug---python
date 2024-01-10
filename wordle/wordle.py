@@ -13,7 +13,8 @@ def guess(word, solution):
 	hasY = False
 	value = [ "", "", "", "", "" ]
 	check = [ "", "", "", "", "" ]
-	tempy = 0
+	tempy = 6
+	tempyin = 6
 	for i in range(5):
 		if word[i] == solution[i]:
 			value[i] = GREEN + word[i] + ENDC
@@ -23,7 +24,7 @@ def guess(word, solution):
 			check[i] = word[i]
 			continue
 		for j in range(5):
-			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j]:
+			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j] and tempy != j:
 				hasY = True
 				value[i] = YELLOW + word[i] + ENDC
 				tempy = j
@@ -38,7 +39,8 @@ def guess(word, solution):
 
 #MAIN
 file = open("wordle_list.txt")
-bank = file.readlines()
+#bank = file.readlines()
+bank = ["putty"]
 file.close()
 #bank = [ "beans", "house", "audio", "pears", "grape", "peony" ]
 solution = random.choice(bank).strip()
