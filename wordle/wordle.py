@@ -39,8 +39,7 @@ def guess(word, solution):
 
 #MAIN
 file = open("wordle_list.txt")
-#bank = file.readlines()
-bank = ["putty"]
+bank = file.readlines()
 file.close()
 #bank = [ "beans", "house", "audio", "pears", "grape", "peony" ]
 solution = random.choice(bank).strip()
