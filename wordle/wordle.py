@@ -19,15 +19,15 @@ def guess(word, solution):
 		if word[i] == solution[i]:
 			value[i] = GREEN + word[i] + ENDC
 			if hasY:
-				if i in tempy:
-					value[tempy.index(i)] = RED + word[tempy.index(i)] + ENDC
+				if tempy[i] != "":
+					value[tempy[i]] = RED + word[tempy[i]] + ENDC
 			check[i] = word[i]
 			continue
 		for j in range(5):
-			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j] and tempy[j] != j:
+			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j] and tempy[j] == "":
 				hasY = True
 				value[i] = YELLOW + word[i] + ENDC
-				tempy[i] = j
+				tempy[j] = i
 				break
 			else:
 				value[i] = RED + word[i] + ENDC
