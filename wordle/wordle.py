@@ -13,22 +13,21 @@ def guess(word, solution):
 	hasY = False
 	value = [ "", "", "", "", "" ]
 	check = [ "", "", "", "", "" ]
-	tempy = 6
-	tempyin = 6
+	tempy = [ "", "", "", "", "" ]
+
 	for i in range(5):
 		if word[i] == solution[i]:
 			value[i] = GREEN + word[i] + ENDC
 			if hasY:
-				if tempy == i:
-					value[tempyin] = RED + word[tempy] + ENDC
+				if i in tempy:
+					value[tempy.index(i)] = RED + word[tempy.index(i)] + ENDC
 			check[i] = word[i]
 			continue
 		for j in range(5):
-			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j] and tempy != j:
+			if word[i] == solution[j] and word[i] != check[i] and word[j] != check[j] and tempy[j] != j:
 				hasY = True
 				value[i] = YELLOW + word[i] + ENDC
-				tempy = j
-				tempyin = i
+				tempy[i] = j
 				break
 			else:
 				value[i] = RED + word[i] + ENDC
@@ -38,11 +37,11 @@ def guess(word, solution):
 	print("Try again.")
 
 #MAIN
-file = open("wordle_list.txt")
-bank = file.readlines()
-file.close()
+bank_file = open('wordle_list.txt')
+bank = set(bank_file.read().split())
+bank_file.close()
 #bank = [ "beans", "house", "audio", "pears", "grape", "peony" ]
-solution = random.choice(bank).strip()
+solution = random.choice(list(bank))
 guesses = 6
 print("Please enter first guess:")
 while True:
@@ -51,6 +50,9 @@ while True:
 		print("CORRECT! YOU WIN!")
 		print(GREEN + word + ENDC)
 		exit()
+	if word not in bank:
+		print("Not in word bank.")
+		continue
 	if len(word) == 5:
 		guess(word, solution)
 		guesses -= 1
